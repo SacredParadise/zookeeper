@@ -84,6 +84,7 @@ public class QuorumPeerMain {
      * @param args path to the configfile
      */
     public static void main(String[] args) {
+        LOG.info("begin");
         QuorumPeerMain main = new QuorumPeerMain();
         try {
             main.initializeAndRun(args);

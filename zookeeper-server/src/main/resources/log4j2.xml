@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="error" monitorInterval="30">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<MarkerFilter marker="VISITOR_MARKER" onMatch="DENY"
+				onMismatch="NEUTRAL" />
+			<ThresholdFilter level="INFO" onMatch="ACCEPT"
+				onMismatch="NEUTRAL" />
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</Console>
+		<!-- debug级别 打印到business_debug -->
+		<RollingFile name="debug_log"
+			fileName="../logs/zookeeper_server_debug.log" append="true"
+			filePattern="../logs/zookeeper_server_debug-%d{yyyy-MM-dd}.log">
+			<Filters>
+				<MarkerFilter marker="VISITOR_MARKER" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="info" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="debug" onMatch="ACCEPT"
+					onMismatch="NEUTRAL" />
+			</Filters>
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"
+					interval="1" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</RollingFile>
+		<!-- info级别 打印到zookeeper_server_info -->
+		<RollingFile name="info_log" fileName="../logs/zookeeper_server_info.log"
+			append="true" filePattern="../logs/zookeeper_server_info-%d{yyyy-MM-dd}.log">
+			<Filters>
+				<MarkerFilter marker="VISITOR_MARKER" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="info" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"
+					interval="1" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</RollingFile>
+		<!-- warn级别打印到warn -->
+		<RollingFile name="warn_log" fileName="../logs/zookeeper_server_warn.log"
+			append="true" filePattern="../logs/zookeeper_server_warn-%d{yyyy-MM-dd}.log">
+			<Filters>
+				<MarkerFilter marker="VISITOR_MARKER" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="error" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"
+					interval="1" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</RollingFile>
+		<!-- error级别 打印到zookeeper_server_error -->
+		<RollingFile name="error_log"
+			fileName="../logs/zookeeper_server_error.log" append="true"
+			filePattern="../logs/zookeeper_server_error-%d{yyyy-MM-dd}.log">
+			<Filters>
+				<MarkerFilter marker="VISITOR_MARKER" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="error" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"
+					interval="1" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</RollingFile>
+
+		<!-- 数据错误信息log -->
+		<RollingFile name="data_err_log"
+			fileName="../logs/zookeeper_server_data_err_log.log" append="true"
+			filePattern="../logs/zookeeper_server_data_err_log-%d{yyyy-MM-dd}.log">
+			<Filters>
+				<MarkerFilter marker="DATA_ERR_MARKER" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"
+					interval="1" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</RollingFile>
+
+		<!-- 访问记录log -->
+		<RollingFile name="visitor_log"
+			fileName="../logs/zookeeper_server_visitor_log.log" append="true"
+			filePattern="../logs/zookeeper_server_visitor_log-%d{yyyy-MM-dd}.log">
+			<Filters>
+				<MarkerFilter marker="VISITOR_MARKER" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"
+					interval="1" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</RollingFile>
+	</appenders>
+
+
+	<loggers>
+		<!--建立一个默认的root的logger -->
+		<root level="info">
+			<appender-ref ref="Console" />
+			<appender-ref ref="debug_log" />
+			<appender-ref ref="info_log" />
+			<appender-ref ref="warn_log" />
+			<appender-ref ref="error_log" />
+			<appender-ref ref="data_err_log" />
+			<appender-ref ref="visitor_log" />
+		</root>
+
+		<!--<logger name="com.yuntx.quality.business" level="info" additivity="false">-->
+			<!--<appender-ref ref="Console" />-->
+		<!--</logger>-->
+
+	</loggers>
+</configuration>

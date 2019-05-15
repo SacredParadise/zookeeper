@@ -207,6 +207,8 @@ public class ZooKeeperServerMain {
                     LOG.warn("Error while stopping metrics", error);
                 }
             }
+
+            LOG.info("finish");
         }
     }
 
